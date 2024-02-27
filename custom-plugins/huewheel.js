@@ -285,13 +285,13 @@ function HueWheel(elementID, shapes, target_angle, locationAngles, probe, probeB
 
         if (showColor) {
             if (probeByLocation) {
-                stimuliDisplay.drawShapesProbeByLocation(canvas, shapes, [r, g, b], locationAngles, [0, 1, 2, 3], false, probe, jitters);
+                stimuliDisplay.drawShapesProbeByLocation(canvas, shapes, [r, g, b], locationAngles, Array.from({ length: jitters.length }, (_, i) => i+1), false, probe, jitters);
             } else {
                 stimuliDisplay.drawShapesProbeByShape(canvas, shape, [r, g, b], false);
             }
         } else {
             if (probeByLocation) {
-                stimuliDisplay.drawShapesProbeByLocation(canvas, shapes, [255, 255, 255], locationAngles, [0, 1, 2, 3], false, probe, jitters);
+                stimuliDisplay.drawShapesProbeByLocation(canvas, shapes, [255, 255, 255], locationAngles, Array.from({ length: jitters.length }, (_, i) => i+1), false, probe, jitters);
             } else {
                 stimuliDisplay.drawShapesProbeByShape(canvas, shape, [255, 255, 255], false);
             }

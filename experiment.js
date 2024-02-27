@@ -367,29 +367,29 @@ function generateAllTrials() {
         };
     }
 
-    function generateSingleBlock(numItems, probeByLocation) {
+    function generateSingleBlock(numTrials, experimentPart, numItems, probeByLocation) {
         return [
-            generateBeforePracticeMessage(numItems, probeByLocation),
-            generateBlock(numPracticeTrials, "practice", probeByLocation, numItems),
             generateBeforeBlockMessage(numItems, probeByLocation),
-            generateBlock(numberRepeats, "test", probeByLocation, numItems),
+            generateBlock(numTrials, experimentPart, probeByLocation, numItems),
         ];
     }
 
     var trials = [
         generateFirstBlockInstructions(),
-        generateSingleBlock(4, true),
+        generateSingleBlock(numPracticeTrials, "practice", 4, true),
+        generateSingleBlock(numberRepeats, "test", 4, true),
         breaks,
-        generateSingleBlock(5, true),
+        generateSingleBlock(numberRepeats, "test", 5, true),
         breaks,
-        generateSingleBlock(6, true),
+        generateSingleBlock(numberRepeats, "test", 6, true),
         breaks,
         generateSecondBlockInstructions(),
-        generateSingleBlock(4, false),
+        generateSingleBlock(numPracticeTrials, "practice", 4, false),
+        generateSingleBlock(numberRepeats, "test", 4, false),
         breaks,
-        generateSingleBlock(5, false),
+        generateSingleBlock(numberRepeats, "test", 5, false),
         breaks,
-        generateSingleBlock(6, false),
+        generateSingleBlock(numberRepeats, "test", 6, false),
     ];
     trials = trials.flat(Infinity);
 
