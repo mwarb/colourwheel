@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Colorwheel Task </title>
+    <meta charset="UTF-8">
+
+    <script src="dist/jspsych.js"></script>
+    <link rel="stylesheet" href="dist/jspsych.css" />
+
+    <script src="dist/plugin-canvas-keyboard-response.js"></script>
+    <script src="dist/plugin-canvas-button-response.js"></script>
+    <script src="dist/plugin-image-button-response.js"></script>
+    <script src="dist/plugin-html-button-response.js"></script>
+    <script src="dist/plugin-html-keyboard-response.js"></script>
+    <script src="dist/plugin-survey-text.js"></script>
+    <script src="dist/plugin-initialize-microphone.js"></script>
+    <script src="dist/plugin-html-audio-response.js"></script>
+    <script src="dist/plugin-resize.js"></script>
+    <script src="dist/plugin-preload.js"></script>
+    <script src="dist/plugin-instructions.js"></script>
+    <script src="dist/plugin-audio-button-response.js"></script>
+
+    <script src="pavlovia/jspsych-7-pavlovia-2022.1.1.js"></script>
+    <script src="dist/datapipe.js"></script>
+
+    <script src="custom-plugins/stimuli-display.js"></script>
+    <script src="custom-plugins/cie-colors.js"></script>
+    <script src="custom-plugins/pre-response-trial.js"></script>
+    <script src="custom-plugins/colorwheel-trial.js"></script>
+    <script src="custom-plugins/huewheel.js"></script>
+    <script src="experiment.js"></script>
+</head>
+
+<body>
+    <script type='text/javascript'>
+        var jsPsych = initJsPsych({
+            on_finish: function() {
+                console.log(jsPsych.data.get().filter([{
+                    test_part: 'test'
+                }, {
+                    test_path: 'survey'
+                }]).json());
+            },
+            show_progress_bar: false,
+            override_safe_mode: true
+        });
+
+        jsPsych.run(timeline);
+    </script>
+</body>
+
+</html>
