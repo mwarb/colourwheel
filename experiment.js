@@ -456,7 +456,7 @@ function finalisePavlovia() {
 }
 
 function finaliseExperiment() {
-    const saveData = {
+    var saveData = {
         type: jsPsychPipe,
         action: "save",
         experiment_id: "diAM7EHFyUAj",
