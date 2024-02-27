@@ -376,18 +376,18 @@ function generateAllTrials() {
         generateFirstBlockInstructions(),
         generateSingleBlock(numPracticeTrials, "practice", 4, true),
         generateSingleBlock(numberRepeats, "test", 4, true),
-        breaks,
-        generateSingleBlock(numberRepeats, "test", 5, true),
-        breaks,
-        generateSingleBlock(numberRepeats, "test", 6, true),
-        breaks,
-        generateSecondBlockInstructions(),
-        generateSingleBlock(numPracticeTrials, "practice", 4, false),
-        generateSingleBlock(numberRepeats, "test", 4, false),
-        breaks,
-        generateSingleBlock(numberRepeats, "test", 5, false),
-        breaks,
-        generateSingleBlock(numberRepeats, "test", 6, false),
+        // breaks,
+        // generateSingleBlock(numberRepeats, "test", 5, true),
+        // breaks,
+        // generateSingleBlock(numberRepeats, "test", 6, true),
+        // breaks,
+        // generateSecondBlockInstructions(),
+        // generateSingleBlock(numPracticeTrials, "practice", 4, false),
+        // generateSingleBlock(numberRepeats, "test", 4, false),
+        // breaks,
+        // generateSingleBlock(numberRepeats, "test", 5, false),
+        // breaks,
+        // generateSingleBlock(numberRepeats, "test", 6, false),
     ];
     trials = trials.flat(Infinity);
 
@@ -458,10 +458,18 @@ function finaliseExperiment() {
         type: jsPsychPipe,
         action: "save",
         experiment_id: "diAM7EHFyUAj",
-        filename: `${username}.csv`,
+        filename: function() { return `${username}.csv` },
         data_string: ()=>jsPsych.data.get().csv()
     };
     timeline.push(saveData);
+
+    var finished = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: '<div style="font-size:25px;">Your data has finished uploading! You can close the experiment now. Thank you for your participation.</div>',
+        choices: "NO_KEYS",
+        trial_duration: 10000
+    };
+    timeline.push(finished);
 }
 
 
