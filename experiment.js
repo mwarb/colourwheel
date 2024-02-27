@@ -482,4 +482,4 @@ generatePostExperimentSurvey();
 // end experiment
 generateDebriefScreen();
 // if (!debug) finalisePavlovia();
-saveData();
+finaliseExperiment();
