@@ -10,8 +10,6 @@
  */
 function HueWheel(elementID, shapes, target_angle, locationAngles, probe, probeByLocation, random_rotation, callbackFunction, jitters) {
 
-    console.log(probeByLocation);
-
     if (isStr(elementID))
         elementID = document.getElementById(elementID);
 

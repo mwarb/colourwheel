@@ -274,8 +274,6 @@ function generateAllTrials() {
         let currentJitters = Array.from({length: trialShapes.length}, (() => getRandomJitter()));
         let currentProbeByLocation = probeByLocation;
 
-        console.log(currentJitters);
-
         let testProcedure = {
             timeline: [spaceWhenReady, pretrial, colorwheel],
             repetitions: 1,
