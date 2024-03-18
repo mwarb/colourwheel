@@ -25,8 +25,8 @@ var stimuliDisplay = {
         this.colorwheelOuterDiameter = pxPerMillimeter * 160;
 
         // jitter bounds
-        this.jitterWidth = pxPerMillimeter * 10;
-        this.jitterHeight = pxPerMillimeter * 10;
+        this.jitterWidth = pxPerMillimeter * 8;
+        this.jitterHeight = pxPerMillimeter * 8;
     },
 
     getLocationsFromAngles(locationAngles) {
