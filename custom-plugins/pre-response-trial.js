@@ -152,12 +152,9 @@ var jsPsychPretrialResponse = (
                     .then(() => clearHtml(ctx))
                     .then(() => showFixation(ctx))
                     .then(() => delay(500))
-                    .then(() => clearHtml(ctx))
-                    .then(() => delay(1000))
-                    .then(() => clearHtml(ctx))
-                    .then(() => stimuliDisplay.drawShapes(canvas, trial.shapes, trial.colors, trial.locationAngles, Array.from({ length: trial.colors.length }, (v, i) => i), false, trial.jitters))
+                    .then(() => stimuliDisplay.drawShapes(canvas, trial.shapes, trial.colors, trial.locationAngles, Array.from({ length: trial.colors.length }, (v, i) => i), true, trial.jitters))
                     .then(() => delay(400))
-                    .then(() => clearHtml(ctx))
+                    .then(() => showFixation(ctx))
                     .then(() => delay(1000))
                     .then(() => record());
 

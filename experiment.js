@@ -12,7 +12,7 @@ var originalPxPerMillimeter = 6.522;
 var pxPerMillimeter = 6.522;
 
 var locationAngles = [];
-for (let theta = 0; theta < 2 * Math.PI; theta += 2 * Math.PI / 12) {
+for (let theta = 0; theta < 2 * Math.PI; theta += 2 * Math.PI / 8) {
     locationAngles.push(theta);
 }
 
@@ -51,7 +51,8 @@ function preloadImages() {
             'media/instructions/wm/instruction_b2_s1.png',
             'media/instructions/wm/instruction_b2_s2.png',
             'media/instructions/wm/instruction_b2_s3.png',
-            'media/instructions/wm/instruction_b2_s4.png'
+            'media/instructions/wm/instruction_b2_s4.png',
+            'media/instructions/wm/instruction_b2_s5.png'
         ],
         audio: [
             'media/audio/test.ogg'
@@ -173,7 +174,8 @@ function generateSecondBlockInstructions() {
             '<img src="media/instructions/wm/instruction_b2_s1.png" width="900" height="630"></img>' + '<div style="font-size:25px;"><br></div>',
             '<img src="media/instructions/wm/instruction_b2_s2.png" width="900" height="630"></img>' + '<div style="font-size:25px;"><br></div>',
             '<img src="media/instructions/wm/instruction_b2_s3.png" width="900" height="630"></img>' + '<div style="font-size:25px;"><br></div>',
-            '<img src="media/instructions/wm/instruction_b2_s4.png" width="900" height="630"></img>' + '<div style="font-size:25px;"><br></div>'
+            '<img src="media/instructions/wm/instruction_b2_s4.png" width="900" height="630"></img>' + '<div style="font-size:25px;"><br></div>',
+            '<img src="media/instructions/wm/instruction_b2_s5.png" width="900" height="630"></img>' + '<div style="font-size:25px;"><br></div>'
         ],
         show_clickable_nav: true
     }
