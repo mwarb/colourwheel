@@ -2,7 +2,7 @@
 var username;
 
 var numPracticeTrials = 5;
-var numberRepeats = 5; 
+var numberRepeats = 50; 
 
 var availableShapes = ['cross', 'diamond', 'circle', 'triangle', 'arrow', 'flag'];
 
@@ -378,16 +378,16 @@ function generateAllTrials() {
         generateFirstBlockInstructions(),
         generateSingleBlock(numPracticeTrials, "practice", 4, true),
         generateSingleBlock(numberRepeats, "test", 4, true),
-        breaks,
-        generateSingleBlock(numberRepeats, "test", 5, true),
+        // breaks,
+        // generateSingleBlock(numberRepeats, "test", 5, true),
         breaks,
         generateSingleBlock(numberRepeats, "test", 6, true),
         breaks,
         generateSecondBlockInstructions(),
         generateSingleBlock(numPracticeTrials, "practice", 4, false),
         generateSingleBlock(numberRepeats, "test", 4, false),
-        breaks,
-        generateSingleBlock(numberRepeats, "test", 5, false),
+        // breaks,
+        // generateSingleBlock(numberRepeats, "test", 5, false),
         breaks,
         generateSingleBlock(numberRepeats, "test", 6, false),
     ];
