@@ -55,7 +55,7 @@ function preloadImages() {
             'media/instructions/wm/instruction_b2_s5.png'
         ],
         audio: [
-            'media/audio/test.ogg'
+            'media/audio/test.mp3'
         ],
         show_detailed_errors: true,
         show_progress_bar: true,
@@ -109,7 +109,7 @@ function performCalibration() {
     if (!debug) {
         var speakerCheck = {
             type: jsPsychAudioButtonResponse,
-            stimulus: "media/audio/test.ogg",
+            stimulus: "media/audio/test.mp3",
             choices: ['Continue'],
             prompt: '<div style="font-size:25px;"><br><br>Can you hear the sound of a river?<br><br>Make sure your speakers are on, and adjust your speaker volume until the audio is at a comfortable hearing level. When you can hear the sound of the river comfortably, press [Continue].<br><br></div>',
             response_ends_trial: true
