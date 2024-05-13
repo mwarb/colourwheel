@@ -67,7 +67,7 @@ function preloadImages() {
 function initialiseExperiment() {
     var welcomeScreen = {
         type: jsPsychHtmlButtonResponse,
-        stimulus: function() { return '<div style="font-size:25px;"><b>Is your ' + platform + ' ID: </b> "' + jsPsych.data.getURLVariable('participant') + '"?<br><br>If so, please press [Next] to continue.<br><br>If your ID is not right, please contact the researchers via email at amy.atkinson@lancaster.ac.uk.<br><br></div>' },
+        stimulus: function() { return '<div style="font-size:25px;"><b>Is your ' + platform + ' ID: </b> "' + jsPsych.data.getURLVariable('participant') + '"?<br><br>If so, please press [Next] to continue.<br><br>If your ID is not right, please contact the researchers via email at pscmwa@leeds.ac.uk.<br><br></div>' },
         choices: ['Next'],
         stimulus_duration: null,
         response_ends_trial: true,
