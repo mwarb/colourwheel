@@ -484,8 +484,6 @@ function finaliseExperiment() {
     }
 }
 
-// 77E7D184
-
 
 // set up 
 // if (!debug) initialisePavlovia();
