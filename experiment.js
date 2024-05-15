@@ -24,7 +24,7 @@ function shuffleArray(array) {
 }
 
 var debug = false;
-var platform = "unique";
+var platform = "prolific";
 
 /* create timeline */
 var timeline = [];
@@ -465,14 +465,26 @@ function finaliseExperiment() {
     };
     timeline.push(saveData);
 
-    var finished = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: '<div style="font-size:25px;">Your data has finished uploading! You can close the experiment now. Thank you for your participation.</div>',
-        choices: "NO_KEYS",
-        trial_duration: 10000
-    };
-    timeline.push(finished);
+    if (platform == "prolific") {
+        var finished = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: `<p>You've finished the last task. Thanks for participating!</p>
+              <p>This study aims to investigate the involvement of a brain region called the Hippocampus in Working Memory, our ability to remember information over short durations.</p>
+              <p><a href="https://app.prolific.com/submissions/complete?cc=77E7D184">Click here to return to Prolific and finalise your submission.</a>. If the link does not work, the completion code is 77E7D184.</p>`,
+            choices: "NO_KEYS"
+          }
+        timeline.push(finished);
+    } else {
+        var finished = {
+            type: jsPsychHtmlKeyboardResponse,
+            stimulus: '<div style="font-size:25px;">Your data has finished uploading! You can close the experiment now. Thank you for your participation.</div>',
+            choices: "NO_KEYS"
+        };
+        timeline.push(finished);
+    }
 }
+
+// 77E7D184
 
 
 // set up 
