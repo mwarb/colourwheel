@@ -57,6 +57,9 @@ function preloadImages() {
         audio: [
             'media/audio/test.mp3'
         ],
+        video: [
+            'media/instructions/wm/wm_task_video.mp4'
+        ],
         show_detailed_errors: true,
         show_progress_bar: true,
         loading_message: '<div>The experiment is being loaded ...</div>',
@@ -161,7 +164,8 @@ function generateFirstBlockInstructions() {
             '<img src="media/instructions/wm/instruction_b1_s3.png" width="900" height="630"></img>' + '<div style="font-size:25px;"><br></div>',
             '<img src="media/instructions/wm/instruction_b1_s4.png" width="900" height="630"></img>' + '<div style="font-size:25px;"><br></div>',
             '<img src="media/instructions/wm/instruction_b1_s5.png" width="900" height="630"></img>' + '<div style="font-size:25px;"><br></div>',
-            '<img src="media/instructions/wm/instruction_b1_s6.png" width="900" height="630"></img>' + '<div style="font-size:25px;"><br></div>'
+            '<img src="media/instructions/wm/instruction_b1_s6.png" width="900" height="630"></img>' + '<div style="font-size:25px;"><br></div>',
+            'Please watch the video below for an example of a trial and the speed at which you should repeat the number.<br><br><video width="900" height="630" controls> <source src="media/instructions/wm/wm_task_video.mp4" type="video/mp4"></video>' + '<div style="font-size:25px;"><br></div>'
         ],
         show_clickable_nav: true
     }
@@ -469,7 +473,7 @@ function finaliseExperiment() {
         var finished = {
             type: jsPsychHtmlKeyboardResponse,
             stimulus: `<p>You've finished the last task. Thanks for participating!</p>
-              <p>This study aims to investigate the involvement of a brain region called the Hippocampus in Working Memory, our ability to remember information over short durations.</p>
+              <p>This study aims to investigate the involvement of a brain region called the Hippocampus in Working Memory, our ability to remember information over short durations. Your data will be used to set the task difficulty to compare healthy 'controls' against individuals with Hippocampal damage.</p>
               <p><a href="https://app.prolific.com/submissions/complete?cc=77E7D184">Click here to return to Prolific and finalise your submission.</a>. If the link does not work, the completion code is 77E7D184.</p>`,
             choices: "NO_KEYS"
           }
