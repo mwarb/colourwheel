@@ -2,7 +2,8 @@
 var username;
 
 var numPracticeTrials = 5;
-var numberRepeats = 50; 
+var numRepeatsPerMiniblock = 25; 
+var numMiniblocksPerCondition = 4;
 
 var availableShapes = ['cross', 'diamond', 'circle', 'triangle', 'arrow', 'flag'];
 
@@ -24,18 +25,10 @@ function shuffleArray(array) {
 }
 
 var debug = false;
-var platform = "prolific";
+var platform = "lab";
 
 /* create timeline */
 var timeline = [];
-
-// function initialisePavlovia() {
-//     var pavlovia_init = {
-//         type: jsPsychPavlovia,
-//         command: "init"
-//     };
-//     timeline.push(pavlovia_init);
-// }
 
 function preloadImages() {
     var preload = {
@@ -70,7 +63,7 @@ function preloadImages() {
 function initialiseExperiment() {
     var welcomeScreen = {
         type: jsPsychHtmlButtonResponse,
-        stimulus: function() { return '<div style="font-size:25px;"><b>Is your anonymous ID: </b> "' + jsPsych.data.getURLVariable('participant') + '"?<br><br>If so, please press [Next] to continue.<br><br>If your ID is not right, please contact the researchers via email at pscmwa@leeds.ac.uk.<br><br></div>' },
+        stimulus: function() { return '<div style="font-size:25px;"><b>Your anonymous ID is: </b> "' + jsPsych.data.getURLVariable('participant') + '"?<br><br>Press [Next] to continue.<br><br></div>' },
         choices: ['Next'],
         stimulus_duration: null,
         response_ends_trial: true,
@@ -378,24 +371,26 @@ function generateAllTrials() {
         ];
     }
 
+    function generateCondition(numTrials, experimentPart, numItems, probeByLocation, numRepeats) {
+        let trials = []
+        for (let i = 0; i < numRepeats; i++) { 
+            trials.push(generateSingleBlock(numTrials, experimentPart, numItems, probeByLocation));
+            trials.push(breaks);
+        }
+
+        return trials;
+    }
+
     var trials = [
         generateFirstBlockInstructions(),
         generateSingleBlock(numPracticeTrials, "practice", 4, true),
-        generateSingleBlock(numberRepeats, "test", 4, true),
-        breaks,
-        generateSingleBlock(numberRepeats, "test", 5, true),
-        // breaks,
-        // generateSingleBlock(numberRepeats, "test", 6, true),
-        breaks,
+        generateCondition(numRepeatsPerMiniblock, "test", 4, true, numMiniblocksPerCondition),
         generateSecondBlockInstructions(),
         generateSingleBlock(numPracticeTrials, "practice", 4, false),
-        generateSingleBlock(numberRepeats, "test", 4, false),
-        breaks,
-        generateSingleBlock(numberRepeats, "test", 5, false),
-        // breaks,
-        // generateSingleBlock(numberRepeats, "test", 6, false),
+        generateCondition(numRepeatsPerMiniblock, "test", 4, false, numMiniblocksPerCondition)
     ];
     trials = trials.flat(Infinity);
+    trials.pop(); // remove last break
 
     for (var trial of trials) {
         timeline.push(trial);
@@ -431,39 +426,11 @@ function generateDebriefScreen() {
     timeline.push(debrief)
 }
 
-// finish connection with pavlovia.org
-function finalisePavlovia() {
-    var pavlovia_finish = {
-        type: jsPsychPavlovia,
-        command: "finish",
-        participantId: username,
-        completedCallback: function() {
-            alert('Data successfully submitted! You can now close the experiment.');
-        },
-        dataFilter: function(data) {
-            return jsPsych.data.get().filter([
-                { test_part: 'test' },
-                { test_part: 'spot_the_word' },
-                { test_path: 'survey' }
-            ]).csv();
-        },
-    };
-    timeline.push(pavlovia_finish);
-
-    var finished = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: '<div style="font-size:25px;">Your data has finished uploading! You can close the experiment now. Thank you for your participation.</div>',
-        choices: "NO_KEYS",
-        trial_duration: 10000
-    };
-    timeline.push(finished);
-}
-
 function finaliseExperiment() {
     var saveData = {
         type: jsPsychPipe,
         action: "save",
-        experiment_id: "VAuJ4xgrbes6",
+        experiment_id: "biRtBLGfGkY8",
         filename: function() { return `${username}.csv` },
         data_string: ()=>jsPsych.data.get().csv()
     };
@@ -479,9 +446,21 @@ function finaliseExperiment() {
           }
         timeline.push(finished);
     } else {
+        var downloadData = {
+            type: jsPsychHtmlButtonResponse,
+            stimulus: function() { return '<div style="font-size:25px;"><b>Please notify the experimenter you have finished the experiment.<br><br></div>' },
+            choices: ['Download data'],
+            stimulus_duration: null,
+            response_ends_trial: true,
+            on_finish: function() {
+                jsPsych.data.get().localSave('csv', `${username}.csv`);
+            }
+        }
+        timeline.push(downloadData);
+
         var finished = {
             type: jsPsychHtmlKeyboardResponse,
-            stimulus: '<div style="font-size:25px;">Your data has finished uploading! You can close the experiment now. Thank you for your participation.</div>',
+            stimulus: '<div style="font-size:25px;">You can close the experiment now.</div>',
             choices: "NO_KEYS"
         };
         timeline.push(finished);
@@ -490,7 +469,6 @@ function finaliseExperiment() {
 
 
 // set up 
-// if (!debug) initialisePavlovia();
 initialiseExperiment();
 preloadImages();
 performCalibration();
@@ -503,5 +481,4 @@ generatePostExperimentSurvey();
 
 // end experiment
 generateDebriefScreen();
-// if (!debug) finalisePavlovia();
 finaliseExperiment();
