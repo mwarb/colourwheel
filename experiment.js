@@ -364,17 +364,11 @@ function generateAllTrials() {
         };
     }
 
-    function generateSingleBlock(numTrials, experimentPart, numItems, probeByLocation) {
-        return [
-            generateBeforeBlockMessage(numItems, probeByLocation),
-            generateBlock(numTrials, experimentPart, probeByLocation, numItems),
-        ];
-    }
-
-    function generateCondition(numTrials, experimentPart, numItems, probeByLocation, numRepeats) {
+    function generateCondition(numTrials, experimentPart, probeByLocation, numItems, numRepeats) {
         let trials = []
+
         for (let i = 0; i < numRepeats; i++) { 
-            trials.push(generateSingleBlock(numTrials, experimentPart, numItems, probeByLocation));
+            trials.push(generateBlock(numTrials, experimentPart, probeByLocation, numItems));
             trials.push(breaks);
         }
 
@@ -383,11 +377,13 @@ function generateAllTrials() {
 
     var trials = [
         generateFirstBlockInstructions(),
-        generateSingleBlock(numPracticeTrials, "practice", 4, true),
-        generateCondition(numRepeatsPerMiniblock, "test", 4, true, numMiniblocksPerCondition),
+        generateBlock(numPracticeTrials, "practice", true, 4),
+        generateBeforeBlockMessage(4, true),
+        generateCondition(numRepeatsPerMiniblock, "test", true, 4, numMiniblocksPerCondition),
         generateSecondBlockInstructions(),
-        generateSingleBlock(numPracticeTrials, "practice", 4, false),
-        generateCondition(numRepeatsPerMiniblock, "test", 4, false, numMiniblocksPerCondition)
+        generateBlock(numPracticeTrials, "practice", false, 4),
+        generateBeforeBlockMessage(4, false),
+        generateCondition(numRepeatsPerMiniblock, "test", false, 4, numMiniblocksPerCondition)
     ];
     trials = trials.flat(Infinity);
     trials.pop(); // remove last break
